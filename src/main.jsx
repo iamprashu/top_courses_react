@@ -9,6 +9,6 @@ import 'react-toastify/ReactToastify.css'
 createRoot(document.getElementById('root')).render(
     <div>
         <App/>
-        <ToastContainer></ToastContainer>
+        <ToastContainer ></ToastContainer>
     </div>
 )
