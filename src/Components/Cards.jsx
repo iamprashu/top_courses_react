@@ -1,26 +1,30 @@
 import Card from "./Card";
 import '../TailwindCompiled.css'
+import { useState } from "react";
 
 
-function Cards({courses}){
-  let FinalCourses = courses.data
-  console.log(courses.data)
+function Cards(props){
+  let FinalCourses = props.courses.data
+  let catogary = props.catogary;
+  const [likedCourses,setLikedCourses] = useState([])
 
   function getCourses(){
-    let allCourses = []
+    if(catogary == "All"){
+      let allCourses = []
     Object.values(FinalCourses).forEach(array => array.forEach(course=>{
       allCourses.push(course);
     }))
- 
-    console.log(allCourses)
-
     return allCourses;
+    }else{
+      return FinalCourses[catogary];
+    }
+
   }
 
   return(
-    <div className="bg-gray-900  w-[100%] p-2 justify-around flex flex-wrap gap-5">
+    <div className="bg-gray-900 mt-10 md:w-[70%] p-2 justify-evenly flex flex-wrap gap-5">
       {getCourses().map(course=>
-        <Card key={course.id}course={course}></Card>
+        <Card key={course.id} course={course} catogary={catogary} likedCourses={likedCourses} setLikedCourses={setLikedCourses}></Card>
       )}
     </div>
   )
